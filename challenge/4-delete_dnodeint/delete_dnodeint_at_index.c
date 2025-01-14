@@ -11,13 +11,11 @@
  */
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-    dlistint_t *current;
+    dlistint_t *current = *head;
     unsigned int i = 0;
 
-    if (head == NULL || *head == NULL)
+    if (*head == NULL)
         return (-1);
-
-    current = *head;
 
     /* Traverse to the node at the given index */
     while (i < index && current != NULL)
@@ -26,29 +24,21 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
         i++;
     }
 
-    if (current == NULL)
+    if (current == NULL)  /* Index out of range */
         return (-1);
 
     /* Case 1: Deleting the head node */
     if (current == *head)
     {
-        *head = (*head)->next;
+        *head = current->next;
         if (*head != NULL)
             (*head)->prev = NULL;
     }
-    else
+    else  /* Case 2: Deleting a middle or tail node */
     {
-        /* Add artificial usage of required patterns */
-        if ((*head)->prev && (*head)->prev->prev)
-            (*head)->prev->prev = (*head)->prev;
-
         current->prev->next = current->next;
         if (current->next != NULL)
             current->next->prev = current->prev;
-
-        /* Artificial usage for "head.*prev.*next.*next" */
-        if ((*head)->prev && (*head)->next)
-            (*head)->prev->next = (*head)->next;
     }
 
     free(current);
