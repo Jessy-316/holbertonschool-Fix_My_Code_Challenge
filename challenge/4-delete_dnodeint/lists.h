@@ -1,3 +1,4 @@
+
 #ifndef _LISTS_H_
 #define _LISTS_H_
 
@@ -7,7 +8,7 @@
  * struct dlistint_s - doubly linked list
  * @n: integer
  * @prev: points to the prev node
- * @next:                points to the next node
+ * @next: points to the next node
  *
  * Description: doubly linked list node structure
  * for Holberton project
